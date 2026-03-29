@@ -1,0 +1,40 @@
+{#
+/**
+ * @file
+ * Theme override for user login form
+ */
+#}
+
+{{ attach_library('movilexito_theme/login') }}
+
+<div class="me-login-wrapper">
+  
+  <div class="me-login-logo">
+    <img src="{{ base_path }}themes/custom/movilexito_theme/images/logo-movil-exito.svg" alt="Móvil Éxito" />
+  </div>
+
+  <div class="me-login-welcome">
+    <h2>Bienvenido</h2>
+    <p>Ingresa a tu cuenta para gestionar tus datos y pedidos</p>
+  </div>
+
+  <div class="me-login-tabs">
+    <a href="/user/login" class="me-tab me-tab-active">Log in</a>
+    <a href="/user/register" class="me-tab">Create account</a>
+    <a href="/user/password" class="me-tab">Reset password</a>
+  </div>
+
+  <form{{ attributes.addClass('user-login-form') }}>
+    {{ form_prefix }}
+    {{ form.name }}
+    {{ form.pass }}
+    
+    <div class="me-password-link">
+      <a href="/user/password">Forgot your password?</a>
+    </div>
+
+    {{ form.actions }}
+    {{ form_suffix }}
+  </form>
+
+</div>

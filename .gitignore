@@ -1,0 +1,181 @@
+# Drupal 10 / PruebaTecnicaExito - .gitignore
+
+# ================================================================
+# ENVIRONMENT & CONFIGURATION
+# ================================================================
+# Local environment variables
+.env
+.env.local
+.env.*.local
+
+# Drupal settings with credentials
+web/sites/*/settings.php
+web/sites/*/services.yml
+
+# Local development files (not tracked)
+.ddev/
+ddev
+DDEV/
+
+# ================================================================
+# DEPENDENCIES & BUILD ARTIFACTS
+# ================================================================
+# Composer vendor directory (use composer install to restore)
+/vendor/
+
+# Node modules (if using Webpack, etc.)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Generated files
+/.eslintrc.extension.json
+
+# ================================================================
+# DRUPAL FILES & UPLOADS
+# ================================================================
+# Drupal uploaded files (exclude backup and migrations)
+web/sites/*/files/
+web/sites/*/private/
+
+# Drupal system files
+web/sites/default/default.services.yml
+web/sites/default/default.settings.php
+
+# Drupal translation files
+web/sites/*/translations/
+
+# ================================================================
+# IDE & EDITOR FILES
+# ================================================================
+# VSCode
+.vscode/
+*.code-workspace
+
+# PhpStorm
+.idea/
+.phpstorm.meta.php
+.php_cs.cache
+*.iml
+*.iws
+*.ipr
+
+# Sublime Text
+*.sublime-workspace
+*.sublime-project
+
+# Vim
+.swp
+.swo
+*~
+.*.sw[op]
+
+# Emacs
+*~
+.\#*
+\#*\#
+
+# ================================================================
+# OS FILES
+# ================================================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.lnk
+
+# Linux
+.directory
+.Trash-*
+
+# ================================================================
+# TEMPORARY & DEBUG FILES
+# ================================================================
+# PHP Debug
+.php_cs
+.phpunit.result.cache
+
+# Drush
+drush_cr_error.txt
+drush_updatedh_*.log
+
+# Database dumps
+*.sql
+*.sql.gz
+*.dump
+
+# Backup files
+*.bak
+*.backup
+*~
+*.orig
+
+# ================================================================
+# CI/CD & TESTING
+# ================================================================
+# Coverage reports
+coverage/
+.coverage
+.codeclimate.json
+
+# PHPUnit
+.phpunit.xml
+
+# Prettier
+.prettierrc
+
+# ================================================================
+# BUILD & DIST
+# ================================================================
+# Build artifacts
+dist/
+build/
+out/
+
+# CSS/JS compiled files (if using build tools)
+web/themes/custom/*/css/*.css.map
+web/themes/custom/*/js/*.js.map
+
+# ================================================================
+# CACHE & TEMPORARY
+# ================================================================
+# System temporary files
+tmp/
+temp/
+cache/
+
+# Drupal cache (rebuild with drush cr)
+web/sites/*/cache/
+
+# ================================================================
+# CUSTOM EXCEPTIONS (WHITELIST)
+# ================================================================
+# Uncomment below if you need to track specific generated files
+# !web/themes/custom/*/css/
+# !web/modules/custom/*/templates/
+# !web/.htaccess
+# !web/web.config
+
+# ================================================================
+# DOCUMENTATION & EXAMPLES
+# ================================================================
+# Keep documentation, but skip local notes
+*.local.md
+NOTES.txt
+.TODO
+
+# Keep README but skip dev docs
+!README*.md
+!ARCHITECTURE.md
+!AUDIT_REPORT.md
+!INDEX.md

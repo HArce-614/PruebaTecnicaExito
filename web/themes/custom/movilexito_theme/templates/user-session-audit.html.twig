@@ -1,0 +1,209 @@
+{# User session audit dashboard #}
+<div class="user-session-audit">
+  
+  {# Current Session Info #}
+  <section class="session-current">
+    <div class="session-header">
+      <h2 class="session-title">Sesión Actual</h2>
+      <span class="session-status session-status--active">
+        <svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true">
+          <circle cx="10" cy="10" r="8" fill="none" stroke="currentColor" stroke-width="2"/>
+          <circle cx="10" cy="10" r="4" fill="currentColor"/>
+        </svg>
+        Activa
+      </span>
+    </div>
+    
+    <div class="session-grid">
+      <div class="session-item">
+        <span class="session-label">Dispositivo</span>
+        <span class="session-value">PC/Navegador</span>
+      </div>
+      <div class="session-item">
+        <span class="session-label">Navegador</span>
+        <span class="session-value">Chrome 125.0</span>
+      </div>
+      <div class="session-item">
+        <span class="session-label">Sistema Operativo</span>
+        <span class="session-value">Windows 10</span>
+      </div>
+      <div class="session-item">
+        <span class="session-label">Dirección IP</span>
+        <span class="session-value font-mono">192.168.1.1</span>
+      </div>
+      <div class="session-item">
+        <span class="session-label">Ubicación</span>
+        <span class="session-value">Bogotá, Colombia</span>
+      </div>
+      <div class="session-item">
+        <span class="session-label">Última Actividad</span>
+        <span class="session-value">Hace 2 minutos</span>
+      </div>
+    </div>
+  </section>
+
+  {# Security Overview #}
+  <section class="session-security">
+    <h2 class="section-title">Seguridad</h2>
+    
+    <div class="security-grid">
+      <div class="security-card">
+        <div class="security-icon security-icon--strong">
+          <svg viewBox="0 0 20 20" aria-hidden="true" width="24" height="24">
+            <path d="M10 2L4 5v5c0 5 6 6 6 6s6-1 6-6V5l-6-3z" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M7 10l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+        </div>
+        <h3 class="security-card-title">Contraseña</h3>
+        <p class="security-card-text">Fuerte</p>
+        <a href="#" class="security-action">Cambiar contraseña</a>
+      </div>
+
+      <div class="security-card">
+        <div class="security-icon security-icon--warning">
+          <svg viewBox="0 0 20 20" aria-hidden="true" width="24" height="24">
+            <path d="M10 2L2 18h16L10 2z" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            <circle cx="10" cy="13" r="1" fill="currentColor"/>
+            <line x1="10" y1="6" x2="10" y2="11" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <h3 class="security-card-title">Verificación 2FA</h3>
+        <p class="security-card-text">No habilitada</p>
+        <a href="#" class="security-action">Habilitar 2FA</a>
+      </div>
+
+      <div class="security-card">
+        <div class="security-icon security-icon--info">
+          <svg viewBox="0 0 20 20" aria-hidden="true" width="24" height="24">
+            <circle cx="10" cy="10" r="8" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            <circle cx="10" cy="7" r="1" fill="currentColor"/>
+            <path d="M10 10v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3 class="security-card-title">Sesiones Activas</h3>
+        <p class="security-card-text">1 sesión</p>
+        <a href="#" class="security-action">Ver todas</a>
+      </div>
+    </div>
+  </section>
+
+  {# Login History #}
+  <section class="session-history">
+    <h2 class="section-title">Historial de Inicios de Sesión</h2>
+    
+    <div class="history-list">
+      <div class="history-item history-item--success">
+        <div class="history-icon">
+          <svg viewBox="0 0 20 20" aria-hidden="true" width="18" height="18">
+            <path d="M10 2C5.6 2 2 5.6 2 10s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm3 8l-4 4-2-2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="history-content">
+          <p class="history-title">Inicio de sesión exitoso</p>
+          <p class="history-meta">Chrome 125.0 • Windows 10 • 192.168.1.1</p>
+          <time class="history-time">Hace 2 minutos</time>
+        </div>
+      </div>
+
+      <div class="history-item history-item--success">
+        <div class="history-icon">
+          <svg viewBox="0 0 20 20" aria-hidden="true" width="18" height="18">
+            <path d="M10 2C5.6 2 2 5.6 2 10s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm3 8l-4 4-2-2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="history-content">
+          <p class="history-title">Inicio de sesión exitoso</p>
+          <p class="history-meta">Safari 17.0 • macOS 14.3 • 192.168.1.50</p>
+          <time class="history-time">Hace 3 días</time>
+        </div>
+      </div>
+
+      <div class="history-item history-item--failed">
+        <div class="history-icon">
+          <svg viewBox="0 0 20 20" aria-hidden="true" width="18" height="18">
+            <path d="M10 2C5.6 2 2 5.6 2 10s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm0 14c4.4 0 8-3.6 8-8s-3.6-8-8-8-8 3.6-8 8 3.6 8 8 8zm3-9l-6 6m0-6l6 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="history-content">
+          <p class="history-title">Intento de inicio fallido</p>
+          <p class="history-meta">Firefox 124.0 • Windows 10 • 203.45.130.20</p>
+          <time class="history-time">Hace 1 semana</time>
+        </div>
+      </div>
+
+      <div class="history-item history-item--success">
+        <div class="history-icon">
+          <svg viewBox="0 0 20 20" aria-hidden="true" width="18" height="18">
+            <path d="M10 2C5.6 2 2 5.6 2 10s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm3 8l-4 4-2-2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="history-content">
+          <p class="history-title">Inicio de sesión exitoso</p>
+          <p class="history-meta">Chrome 125.0 • Android 14 • 206.89.45.10</p>
+          <time class="history-time">Hace 10 días</time>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {# Active Sessions #}
+  <section class="session-active-list">
+    <h2 class="section-title">Sesiones Activas</h2>
+    
+    <div class="session-table">
+      <div class="session-row session-row--header">
+        <div class="session-col">Dispositivo</div>
+        <div class="session-col">Ubicación</div>
+        <div class="session-col">IP</div>
+        <div class="session-col">Última Actividad</div>
+        <div class="session-col">Acción</div>
+      </div>
+
+      <div class="session-row session-row--current">
+        <div class="session-col">
+          <span class="device-badge">
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+              <rect x="2" y="3" width="20" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
+              <path d="M8 17h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            Chrome • Windows
+          </span>
+          <span class="badge-current">Esta sesión</span>
+        </div>
+        <div class="session-col">Bogotá, Colombia</div>
+        <div class="session-col font-mono">192.168.1.1</div>
+        <div class="session-col">Ahora</div>
+        <div class="session-col">
+          <button class="btn-icon" title="Cierra esta sesión" disabled>
+            <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true">
+              <path d="M13 8l-1 1 3 3-3 3 1 1 4-4-4-4zM7 6H4c-1 0-2 1-2 2v8c0 1 1 2 2 2h3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="session-row">
+        <div class="session-col">
+          <span class="device-badge">
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+              <rect x="1" y="5" width="22" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
+              <path d="M1 10h22" stroke="currentColor" stroke-width="2"/>
+            </svg>
+            Safari • macOS
+          </span>
+        </div>
+        <div class="session-col">Bogotá, Colombia</div>
+        <div class="session-col font-mono">192.168.1.50</div>
+        <div class="session-col">Hace 3 días</div>
+        <div class="session-col">
+          <button class="btn-icon btn-danger" title="Cerrar sesión">
+            <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true">
+              <path d="M13 8l-1 1 3 3-3 3 1 1 4-4-4-4zM7 6H4c-1 0-2 1-2 2v8c0 1 1 2 2 2h3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>

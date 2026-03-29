@@ -1,0 +1,18 @@
+# web/modules/custom/custom_events/custom_events.services.yml
+services:
+  custom_events.country_service:
+    class: Drupal\custom_events\Service\CountryService
+    arguments:
+      - '@http_client'
+      - '@cache.default'
+      - '@logger.channel.custom_events'
+
+  custom_events.event_registration_service:
+    class: Drupal\custom_events\Service\EventRegistrationService
+    arguments:
+      - '@entity_type.manager'
+      - '@current_user'
+
+  logger.channel.custom_events:
+    parent: logger.channel_base
+    arguments: ['custom_events']

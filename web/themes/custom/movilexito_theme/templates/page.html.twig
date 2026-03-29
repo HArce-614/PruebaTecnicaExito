@@ -1,0 +1,119 @@
+{#
+/**
+ * @file
+ * Móvil Éxito page layout.
+ */
+#}
+
+{# ── Header ── #}
+<header class="me-header" role="banner">
+  <div class="me-container">
+
+    {# Left: logo + primary menu #}
+    <div class="me-left">
+      <a class="me-logo" href="{{ path('<front>') }}" rel="home" aria-label="{{ 'Móvil Éxito — Inicio'|t }}">
+        <img src="{{ base_path ~ directory }}/images/logo-movil-exito.svg"
+             alt="{{ 'Móvil Éxito'|t }}" height="40" width="auto">
+      </a>
+
+      <nav class="me-nav" id="me-primary-nav" aria-label="{{ 'Navegación principal'|t }}">
+        {{ page.primary_menu }}
+      </nav>
+    </div>
+
+    {# Right: user menu + mobile toggle #}
+    <div class="me-right">
+      {% if page.secondary_menu %}
+        <nav class="me-secondary-nav" aria-label="{{ 'Navegación de usuario'|t }}">
+          {{ page.secondary_menu }}
+        </nav>
+      {% endif %}
+
+      <button class="me-nav-toggle" aria-label="{{ 'Alternar navegación'|t }}"
+              aria-expanded="false" aria-controls="me-primary-nav">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6"  x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+    </div>
+
+  </div>
+</header>
+
+{# ── Breadcrumb ── #}
+{% if page.breadcrumb %}
+  <div class="me-breadcrumb">
+    <div class="me-container">{{ page.breadcrumb }}</div>
+  </div>
+{% endif %}
+
+{# ── Status messages ── #}
+{% if page.highlighted %}
+  <div class="me-messages">
+    <div class="me-container">{{ page.highlighted }}</div>
+  </div>
+{% endif %}
+
+{% if page.help %}
+  <div class="me-container">{{ page.help }}</div>
+{% endif %}
+
+{# ── Main ── #}
+<main class="me-main" role="main">
+  <a id="main-content" tabindex="-1"></a>
+  <div class="me-container">
+    {{ page.content }}
+  </div>
+</main>
+
+{# ── Footer ── #}
+<footer class="me-footer" role="contentinfo">
+  <div class="me-container">
+    {% if page.footer %}
+      {{ page.footer }}
+    {% else %}
+      <div class="me-footer__brand">
+        <img src="{{ base_path ~ directory }}/images/logo-movil-exito-white.svg"
+             alt="{{ 'Móvil Éxito'|t }}" height="36">
+        <p>{{ 'Conectando personas con tecnología.'|t }}</p>
+      </div>
+      <div class="me-footer__links">
+        <h4>{{ 'Navegación'|t }}</h4>
+        <ul>
+          <li><a href="{{ path('<front>') }}">{{ 'Inicio'|t }}</a></li>
+          <li><a href="/events">{{ 'Eventos'|t }}</a></li>
+        </ul>
+      </div>
+      <div class="me-footer__contact">
+        <h4>{{ 'Contacto'|t }}</h4>
+        <p>harvyfarce@gmail.com</p>
+      </div>
+    {% endif %}
+  </div>
+  <div class="me-footer__copy">
+    <div class="me-container">
+      {{ '© @year Móvil Éxito. Todos los derechos reservados.'|t({'@year': "now"|date("Y")}) }}
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var btn = document.querySelector('.me-nav-toggle');
+  var nav = document.getElementById('me-primary-nav');
+  if (!btn || !nav) return;
+  btn.addEventListener('click', function () {
+    var open = nav.classList.toggle('is-open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  document.addEventListener('click', function (e) {
+    if (!btn.contains(e.target) && !nav.contains(e.target)) {
+      nav.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+    }
+  });
+}());
+</script>

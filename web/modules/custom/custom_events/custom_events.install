@@ -1,0 +1,150 @@
+<?php
+// web/modules/custom/custom_events/custom_events.install
+
+/**
+ * @file
+ * Install, update and uninstall functions for the custom_events module.
+ */
+
+use Drupal\Core\Database\Database;
+
+/**
+ * Implements hook_install().
+ */
+function custom_events_install(): void {
+  $role = \Drupal\user\Entity\Role::load('authenticated');
+  if ($role && !$role->hasPermission('register for events')) {
+    $role->grantPermission('register for events')->save();
+  }
+
+  _custom_events_add_menu_link();
+
+  \Drupal::messenger()->addStatus(
+    t('Custom Events module installed successfully. Default configuration has been applied.')
+  );
+}
+
+/**
+ * Adds the Events link to the main navigation menu.
+ */
+function _custom_events_add_menu_link(): void {
+  $storage = \Drupal::entityTypeManager()->getStorage('menu_link_content');
+
+  $existing = $storage->loadByProperties([
+    'menu_name' => 'main',
+    'link__uri'  => 'internal:/events',
+  ]);
+
+  if (empty($existing)) {
+    $storage->create([
+      'title'     => t('Events'),
+      'link'      => ['uri' => 'internal:/events'],
+      'menu_name' => 'main',
+      'expanded'  => FALSE,
+      'enabled'   => TRUE,
+      'weight'    => 10,
+    ])->save();
+  }
+}
+
+/**
+ * Implements hook_update_N().
+ *
+ * Adds Events menu link to main navigation.
+ */
+function custom_events_update_8001(): void {
+  _custom_events_add_menu_link();
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function custom_events_uninstall(): void {
+  // Remove module configuration on uninstall.
+  \Drupal::configFactory()->getEditable('custom_events.settings')->delete();
+
+  \Drupal::messenger()->addStatus(
+    t('Custom Events module uninstalled. All module configuration has been removed.')
+  );
+}
+
+/**
+ * Implements hook_schema().
+ */
+function custom_events_schema(): array {
+  $schema = [];
+
+  $schema['custom_event_registrations'] = [
+    'description' => 'Stores event registrations linking users to events.',
+    'fields' => [
+      'id' => [
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'description' => 'Primary key.',
+      ],
+      'event_id' => [
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'description' => 'Foreign key to the event entity.',
+      ],
+      'uid' => [
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'Foreign key to {users}.uid of the registrant.',
+      ],
+      'first_name' => [
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Registrant first name.',
+      ],
+      'last_name' => [
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Registrant last name.',
+      ],
+      'email' => [
+        'type' => 'varchar',
+        'length' => 254,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Registrant email address.',
+      ],
+      'country' => [
+        'type' => 'varchar',
+        'length' => 2,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'ISO 3166-1 alpha-2 country code.',
+      ],
+      'created' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => 'Unix timestamp of when the registration was created.',
+      ],
+      'status' => [
+        'type' => 'int',
+        'size' => 'tiny',
+        'not null' => TRUE,
+        'default' => 1,
+        'description' => 'Registration status: 1 = active, 0 = cancelled.',
+      ],
+    ],
+    'primary key' => ['id'],
+    'indexes' => [
+      'event_id' => ['event_id'],
+      'uid' => ['uid'],
+      'email' => ['email'],
+    ],
+  ];
+
+  return $schema;
+}

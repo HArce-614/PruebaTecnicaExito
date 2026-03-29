@@ -1,0 +1,113 @@
+{# web/modules/custom/custom_events/templates/event-list.html.twig #}
+{{ attach_library('custom_events/custom-events') }}
+
+<div class="ce-page">
+
+  {# ── Floating carousel — visual only, no buttons ── #}
+  <div class="ce-hero-wrap">
+    <div class="ce-carousel" aria-label="{{ 'Destacados'|t }}" role="region" aria-live="polite">
+    <div class="ce-carousel__track" id="ce-carousel-track">
+      <div class="ce-carousel__slide">
+        <img src="{{ base_path }}modules/custom/custom_events/images/slide-1.svg"
+             alt="{{ 'Evento de Tecnología'|t }}" loading="eager">
+      </div>
+      <div class="ce-carousel__slide">
+        <img src="{{ base_path }}modules/custom/custom_events/images/slide-2.svg"
+             alt="{{ 'Conferencia de Negocios'|t }}" loading="lazy">
+      </div>
+      <div class="ce-carousel__slide">
+        <img src="{{ base_path }}modules/custom/custom_events/images/slide-3.svg"
+             alt="{{ 'Taller Comunitario'|t }}" loading="lazy">
+      </div>
+    </div>
+    <div class="ce-carousel__dots" role="tablist">
+      <button class="ce-carousel__dot is-active" aria-label="{{ 'Slide 1'|t }}" onclick="ceGoTo(0)"></button>
+      <button class="ce-carousel__dot" aria-label="{{ 'Slide 2'|t }}" onclick="ceGoTo(1)"></button>
+      <button class="ce-carousel__dot" aria-label="{{ 'Slide 3'|t }}" onclick="ceGoTo(2)"></button>
+    </div>
+  </div>{# /.ce-carousel #}
+  </div>{# /.ce-hero-wrap #}
+
+  {# ── Events listing — centered below ── #}
+  <section class="ce-listing" aria-label="{{ 'Events'|t }}">
+
+    <header class="ce-listing__header">
+      <h1 class="ce-listing__title">{{ 'Próximos Eventos'|t }}</h1>
+      <div class="ce-listing__header-right">
+        {% if total_count %}
+          <span class="ce-listing__count-badge">
+            {{ total_count == 1 ? '1 evento'|t : '@count eventos'|t({'@count': total_count}) }}
+          </span>
+        {% endif %}
+        {% if is_admin %}
+          <a href="{{ add_event_url }}" class="ce-listing__add-btn">
+            + {{ 'Agregar evento'|t }}
+          </a>
+        {% endif %}
+      </div>
+    </header>
+
+    {% if events %}
+      <ul class="ce-listing__grid" role="list">
+        {% for event in events %}
+          <li class="ce-listing__item">
+            {{- include('@custom_events/event-card.html.twig', {
+              id:                  event.id,
+              title:               event.title,
+              description:         event.description,
+              country:             event.country,
+              event_date:          event.event_date,
+              registered_count:    event.registered_count,
+              user_is_registered:  event.user_is_registered,
+              user_is_anonymous:   event.user_is_anonymous,
+              register_url:        event.register_url,
+              csrf_token:          event.csrf_token,
+              is_featured:         loop.first,
+            }, with_context = false) -}}
+          </li>
+        {% endfor %}
+      </ul>
+
+      {% if pager %}
+        <nav class="ce-listing__pager" aria-label="{{ 'Pagination'|t }}">
+          {{ pager }}
+        </nav>
+      {% endif %}
+    {% else %}
+      <div class="ce-listing__empty" role="status">
+        <svg class="ce-listing__empty-icon" viewBox="0 0 64 64" aria-hidden="true" width="64" height="64">
+          <circle cx="32" cy="32" r="30" fill="none" stroke="currentColor" stroke-width="2"/>
+          <path d="M20 32h24M32 20v24" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <p>{{ empty|default('No hay eventos disponibles en este momento.'|t) }}</p>
+      </div>
+    {% endif %}
+
+  </section>
+
+</div>
+
+<script>
+(function () {
+  var current = 0;
+  var total = 3;
+  var track = document.getElementById('ce-carousel-track');
+  var dots = document.querySelectorAll('.ce-carousel__dot');
+  var timer = setInterval(function () { move(1); }, 5000);
+
+  function move(dir) {
+    current = (current + dir + total) % total;
+    render();
+  }
+
+  function render() {
+    track.style.transform = 'translateX(-' + (current * 100) + '%)';
+    dots.forEach(function (d, i) {
+      d.classList.toggle('is-active', i === current);
+    });
+  }
+
+  window.ceCarousel = function (dir) { clearInterval(timer); move(dir); };
+  window.ceGoTo    = function (i)   { clearInterval(timer); current = i; render(); };
+}());
+</script>

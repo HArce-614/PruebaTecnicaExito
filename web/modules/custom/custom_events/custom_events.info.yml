@@ -1,0 +1,12 @@
+# web/modules/custom/custom_events/custom_events.info.yml
+name: 'Custom Events'
+type: module
+description: 'Manages event creation and user registrations with REST-based country selection and AJAX-driven registration.'
+package: Custom
+core_version_requirement: ^10
+version: '1.0.0'
+dependencies:
+  - drupal:datetime
+  - drupal:text
+  - drupal:user
+  - drupal:options

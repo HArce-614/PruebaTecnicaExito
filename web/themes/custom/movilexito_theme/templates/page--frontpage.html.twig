@@ -1,0 +1,79 @@
+{# Frontpage template for Móvil Éxito theme #}
+{% extends "page.html.twig" %}
+
+{% block content %}
+  <div class="fp-hero">
+    <div class="fp-hero__bg" aria-hidden="true"></div>
+    
+    <div class="fp-hero__content">
+      <div class="fp-hero__inner">
+        <h1 class="fp-hero__title">
+          <span class="fp-hero__accent">¡Descubre</span> los mejores eventos <span class="fp-hero__accent">tecnológicos</span> y de negocios
+        </h1>
+        
+        <p class="fp-hero__subtitle">
+          Conecta con profesionales, expande tus horizontes y sé parte de la comunidad Móvil Éxito.
+        </p>
+        
+        <a href="{{ path('custom_events.listing') }}" class="fp-hero__cta">
+          Explorar Eventos
+          <svg viewBox="0 0 20 20" aria-hidden="true" width="18" height="18">
+            <path d="M7 10h6m-3-3l3 3-3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <section class="fp-features">
+    <div class="fp-features__inner">
+      <h2 class="fp-features__title">¿Por qué unirse?</h2>
+      
+      <div class="fp-features__grid">
+        <article class="fp-feature">
+          <div class="fp-feature__icon">
+            <svg viewBox="0 0 64 64" aria-hidden="true" width="48" height="48">
+              <circle cx="32" cy="20" r="6" fill="currentColor"/>
+              <circle cx="12" cy="44" r="6" fill="currentColor"/>
+              <circle cx="52" cy="44" r="6" fill="currentColor"/>
+              <path d="M32 26v8M32 34l-14 8M32 34l14 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+            </svg>
+          </div>
+          <h3 class="fp-feature__title">Red Profesional</h3>
+          <p class="fp-feature__description">
+            Conecta con expertos, emprendedores e innovadores en tu área.
+          </p>
+        </article>
+
+        <article class="fp-feature">
+          <div class="fp-feature__icon">
+            <svg viewBox="0 0 64 64" aria-hidden="true" width="48" height="48">
+              <rect x="8" y="12" width="48" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="2"/>
+              <path d="M8 22h48M32 22v30M16 32h4v10h-4zM28 36h4v6h-4zM40 28h4v14h-4zM52 24h4v18h-4z" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+            </svg>
+          </div>
+          <h3 class="fp-feature__title">Crecimiento</h3>
+          <p class="fp-feature__description">
+            Desarrolla nuevas habilidades y expande tu conocimiento constantemente.
+          </p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="fp-cta-secondary">
+    <div class="fp-cta-secondary__inner">
+      <div class="fp-cta-secondary__content">
+        <h2 class="fp-cta-secondary__title">¿Tienes un evento que compartir?</h2>
+        <p class="fp-cta-secondary__description">
+          Los organizadores pueden crear y gestionar eventos en nuestra plataforma.
+        </p>
+      </div>
+      
+      <a href="{{ path('custom_events.add') }}" class="fp-cta-secondary__btn">
+        + Crear Evento
+      </a>
+    </div>
+  </section>
+{% endblock %}

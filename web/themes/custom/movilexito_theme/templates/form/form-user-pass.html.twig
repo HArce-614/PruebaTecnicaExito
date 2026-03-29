@@ -1,0 +1,23 @@
+{#
+/**
+ * @file
+ * Theme override for the user password reset form.
+ */
+#}
+{{ attach_library('movilexito_theme/login') }}
+
+<form{{ attributes.addClass('user-pass') }}>
+  <div class="me-password-logo">
+    <img src="{{ base_path }}themes/custom/movilexito_theme/images/logo-movil-exito.svg" alt="Logo" />
+  </div>
+
+  <div class="me-password-welcome">
+    <h2>{{ 'Reset your password'|t }}</h2>
+  </div>
+
+  {{ form_prefix }}
+  {{ form.name }}
+
+  {{ form.actions }}
+  {{ form_suffix }}
+</form>

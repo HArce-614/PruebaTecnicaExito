@@ -1,0 +1,21 @@
+# web/modules/custom/custom_events/custom_events.routing.yml
+
+custom_events.event_list:
+  path: '/events'
+  defaults:
+    _controller: '\Drupal\custom_events\Controller\EventController::listEvents'
+    _title: 'Events'
+  requirements:
+    _permission: 'access content'
+
+custom_events.register:
+  path: '/events/{event_id}/register'
+  defaults:
+    _controller: '\Drupal\custom_events\Controller\EventController::registerForEvent'
+    _title: 'Register for Event'
+  requirements:
+    _permission: 'register for events'
+    _method: 'POST'
+    event_id: '\d+'
+  methods:
+    - POST

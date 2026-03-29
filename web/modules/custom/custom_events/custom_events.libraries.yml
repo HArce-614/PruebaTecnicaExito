@@ -1,0 +1,15 @@
+# web/modules/custom/custom_events/custom_events.libraries.yml
+
+custom-events:
+  version: '1.0.0'
+  css:
+    theme:
+      css/custom-events.css: {}
+  js:
+    js/custom-events.js:
+      attributes:
+        defer: true
+  dependencies:
+    - core/drupal
+    - core/drupalSettings
+    - core/jquery

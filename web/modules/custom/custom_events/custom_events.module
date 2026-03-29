@@ -1,0 +1,89 @@
+<?php
+// web/modules/custom/custom_events/custom_events.module
+
+/**
+ * @file
+ * Primary module hooks for the Custom Events module.
+ */
+
+use Drupal\Core\Entity\EntityInterface;
+
+/**
+ * Implements hook_theme().
+ */
+function custom_events_theme(array $existing, string $type, string $theme, string $path): array {
+  return [
+    'event_list' => [
+      'variables' => [
+        'events'         => [],
+        'total_count'    => 0,
+        'pager'          => NULL,
+        'empty'          => NULL,
+        'is_admin'       => FALSE,
+        'add_event_url'  => NULL,
+      ],
+      'template'  => 'event-list',
+      'path'      => $path . '/templates',
+    ],
+    'event_card' => [
+      'variables' => [
+        'event'              => NULL,
+        'id'                 => 0,
+        'title'              => '',
+        'description'        => '',
+        'country'            => '',
+        'event_date'         => NULL,
+        'registered_count'   => 0,
+        'user_is_registered' => FALSE,
+        'user_is_anonymous'  => FALSE,
+        'is_featured'        => FALSE,
+        'register_url'       => NULL,
+        'csrf_token'         => '',
+      ],
+      'template'  => 'event-card',
+      'path'      => $path . '/templates',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_predelete() for custom_event entities.
+ *
+ * Cascade-deletes all EventRegistration entities when a custom_event is
+ * deleted. Uses the Entity API exclusively — no raw SQL.
+ */
+function custom_events_custom_event_predelete(EntityInterface $entity): void {
+  $storage = \Drupal::entityTypeManager()->getStorage('event_registration');
+
+  try {
+    $ids = \Drupal::entityQuery('event_registration')
+      ->condition('event_id', (int) $entity->id())
+      ->accessCheck(FALSE)
+      ->execute();
+
+    if (empty($ids)) {
+      return;
+    }
+
+    $registrations = $storage->loadMultiple($ids);
+    $storage->delete($registrations);
+
+    \Drupal::logger('custom_events')->info(
+      'Cascade-deleted @count registration(s) for event @id (@title).',
+      [
+        '@count' => count($registrations),
+        '@id'    => $entity->id(),
+        '@title' => $entity->label(),
+      ]
+    );
+  }
+  catch (\Exception $e) {
+    \Drupal::logger('custom_events')->error(
+      'Failed to cascade-delete registrations for event @id: @message',
+      [
+        '@id'      => $entity->id(),
+        '@message' => $e->getMessage(),
+      ]
+    );
+  }
+}

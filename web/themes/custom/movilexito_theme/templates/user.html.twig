@@ -1,0 +1,76 @@
+{# User entity template - displays user profile with simplified session info #}
+<div class="user-entity-wrapper">
+  
+  {# User basic info header #}
+  <section class="user-profile-header">
+    <div class="user-profile-avatar">
+      {% if user_picture %}
+        {{ user_picture }}
+      {% else %}
+        <div class="avatar-placeholder">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+          </svg>
+        </div>
+      {% endif %}
+    </div>
+    
+    <div class="user-profile-info">
+      <h1 class="user-profile-name">{{ username }}</h1>
+      {% if user_email %}
+        <p class="user-profile-email">{{ user_email }}</p>
+      {% endif %}
+      <div class="user-profile-meta">
+        {% if member_for %}
+          <span class="user-meta-item">
+            <svg viewBox="0 0 24 24" aria-hidden="true" width="16" height="16">
+              <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-5.04-6.71l-2.75 3.54-1.3-1.54c-.32-.41-.98-.51-1.41-.1-.43.41-.52 1.06-.1 1.49l2.5 2.92c.2.26.56.42.9.42.37 0 .72-.16.92-.43l4.3-5.52c.31-.41.23-1.07-.18-1.41-.41-.32-1.07-.23-1.4.18z"/>
+            </svg>
+            Miembro por {{ member_for }}
+          </span>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="user-profile-actions">
+      <a href="{{ path('entity.user.edit_form', {'user': user.id}) }}" class="btn btn-primary">
+        <svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18">
+          <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25z" fill="currentColor"/>
+          <path d="M20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" fill="currentColor"/>
+        </svg>
+        Editar Perfil
+      </a>
+    </div>
+  </section>
+
+  {# Divider #}
+  <div class="profile-divider"></div>
+
+  {# Simple Session Info #}
+  <section class="session-simple">
+    <h2 class="session-simple-title">Información de Sesión</h2>
+    
+    <div class="session-simple-grid">
+      <div class="session-simple-item">
+        <span class="session-simple-label">Dispositivo</span>
+        <span class="session-simple-value">Chrome • Windows</span>
+      </div>
+      <div class="session-simple-item">
+        <span class="session-simple-label">Última Actividad</span>
+        <span class="session-simple-value">Hace 2 minutos</span>
+      </div>
+      <div class="session-simple-item">
+        <span class="session-simple-label">Estado</span>
+        <span class="session-simple-value">
+          <span class="badge-active">
+            <svg viewBox="0 0 20 20" width="12" height="12" aria-hidden="true">
+              <circle cx="10" cy="10" r="4" fill="currentColor"/>
+            </svg>
+            Activa
+          </span>
+        </span>
+      </div>
+    </div>
+  </section>
+
+</div>

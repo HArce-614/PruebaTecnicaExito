@@ -1,0 +1,56 @@
+{#
+/**
+ * @file
+ * Theme override for user login form - Sophisticated two-panel design
+ */
+#}
+
+{{ attach_library('movilexito_theme/login') }}
+
+<form{{ attributes.addClass('user-login-form') }}>
+  {{- form_prefix -}}
+  
+  {# Left Panel: Login Form #}
+  <div class="me-login-left">
+    {# Logo #}
+    <div class="me-logo-login">
+      <img src="{{ base_path }}themes/custom/movilexito_theme/images/logo-movil-exito.svg" alt="{{ 'Móvil Éxito'|t }}">
+    </div>
+
+    {# Form Title #}
+    <h1 class="me-login-title">{{ 'Ingresa a tu cuenta'|t }}</h1>
+
+    {# Username Field #}
+    <div class="js-form-item form-item js-form-item-name form-item-name">
+      {{ form.name.title }}
+      {{ form.name }}
+    </div>
+
+    {# Password Field #}
+    <div class="js-form-item form-item js-form-item-pass form-item-pass">
+      {{ form.pass.title }}
+      {{ form.pass }}
+    </div>
+
+    {# Forgot Password Link #}
+    <div class="password-offline-help">
+      <a href="{{ path('user.pass') }}">{{ '¿Olvidaste tu contraseña?'|t }}</a>
+    </div>
+
+    {# Submit Button #}
+    {{ form.actions -}}
+  </div>
+
+  {# Right Panel: Welcome Message #}
+  <div class="me-login-right">
+    <h2>{{ '¡Bienvenido de vuelta!'|t }}</h2>
+    <p>{{ 'Accede a tu cuenta para gestionar tus pedidos y perfiles'|t }}</p>
+    
+    {# Create Account Link #}
+    <a href="{{ path('user.register') }}" class="me-create-account-btn">
+      {{ 'Crear cuenta'|t }}
+    </a>
+  </div>
+
+  {{- form_suffix -}}
+</form>
