@@ -29,8 +29,9 @@ Asegúrate de tener instalados:
 
 | Requisito | Versión | Descripción |
 |-----------|---------|-------------|
-| **PHP** | `^8.1` | Motor de PHP 8.1 o superior |
-| **MySQL/MariaDB** | `5.7+` o `10.2+` | Sistema de base de datos |
+| **PHP** | `^8.4.0` | Motor de PHP 8.4 (Última versión) |
+| **MySQL** | `^9.1.0` | Sistema de base de datos MySQL 9 |
+| **Apache** | `^2.4.62` | Servidor web estable |
 | **Composer** | `^2.0` | Gestor de dependencias PHP |
 | **Drupal** | `^10.0` | Core de Drupal 10.0 o superior |
 | **Drush** | `^11` o `^12` | Herramienta CLI de Drupal (recomendado) |
@@ -852,5 +853,5 @@ Tu instalación de **Prueba Técnica - Desarrollador Full Stack** está completa
 ---
 
 **Última actualización**: 29 de Marzo de 2026  
-**Versión**: 1.1.0  
-**Compatible con**: Drupal 10.0+, PHP 8.1+
+**Versión**: 1.2.0  
+**Compatible con**: Drupal 10.0+, PHP 8.4+, MySQL 9.1+

@@ -73,16 +73,27 @@ Tenemos **7 documentos profesionales** para diferentes necesidades:
 
 ---
 
+## 🚀 Justificación del Stack Tecnológico (Vanguardia)
+
+Este proyecto ha sido desarrollado utilizando versiones de software de última generación para garantizar el mejor rendimiento y seguridad:
+
+1.  **PHP 8.4.0 (Performance & Type Safety)**: Permite aprovechar mejoras de rendimiento significativas y características modernas como *Property Hooks* y *Asymmetric Visibility*, logrando un código más limpio en servicios como `CountryService`.
+2.  **MySQL 9.1.0 (Data Integrity)**: Ofrece optimizaciones avanzadas en el manejo de JSON y una gestión de memoria superior, asegurando integridad transaccional (ACID) en el sistema de inscripciones.
+3.  **Apache 2.4.62 (Stability)**: El estándar de la industria para entornos robustos, garantizando que el manejo de rutas y URLs amigables de Drupal funcione de manera impecable.
+
+---
+
 ## 🏗️ Stack Tecnológico
 
-- **Backend**: PHP 8.1+ con Drupal 10
-- **Frontend**: HTML5 semántico, CSS3, JavaScript vanilla
-- **Base de Datos**: MySQL/MariaDB
+- **Backend**: PHP 8.4.0 (con Drupal 10.3+)
+- **Servidor Web**: Apache 2.4.62
+- **Base de Datos**: MySQL 9.1.0
 - **HTTP Client**: Guzzle (integrado en Drupal)
 - **Validación**: Symfony Validator Component
 - **Caché**: Drupal Cache API
 - **ORM**: Drupal Entity API
 - **API Externa**: REST Countries
+- **Frontend**: HTML5 semántico, CSS3, JavaScript vanilla
 
 ---
 
@@ -439,5 +450,5 @@ Desarrollado como solución técnica completa mostrando:
 ---
 
 **Última actualización**: 29 de Marzo de 2026  
-**Versión**: 1.1.0  
+**Versión**: 1.2.0  
 **Estado**: ✅ Listo para Producción
