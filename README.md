@@ -1,454 +1,261 @@
-# 🎯 PRUEBA TÉCNICA - DESARROLLADOR FULL STACK (PHP + DRUPAL)
+# Prueba Técnica — Gestión de Eventos · Drupal 10
 
-**Gestión de Eventos con Inscripción AJAX en Drupal 10**
+Módulo custom para Drupal 10 que permite crear eventos, listarlos en una página pública, e inscribir usuarios en tiempo real vía AJAX. Incluye tema visual personalizado alineado con la marca Móvil Éxito.
+
+**Stack:** PHP 8.4 · MySQL 9.1 · Apache 2.4 · Drupal 10.3 · WAMP64
 
 ---
 
-## 🚀 Empezar Ahora
+## Requisitos previos
 
-### ⭐ Opción Rápida (5 minutos)
-```bash
-# Si ya tienes Drupal instalado:
+| Software | ¿Cómo se instala? |
+|---|---|
+| **WAMP64** (incluye PHP, MySQL y Apache) | [wampserver.com](https://www.wampserver.com/) → descargar e instalar |
+| **Composer** (gestor de dependencias de PHP) | [getcomposer.org/download](https://getcomposer.org/download/) → descargar `Composer-Setup.exe` e instalar. Cuando pida la ruta de PHP, seleccionar `C:\wamp64\bin\php\php8.4.0\php.exe` |
+| **Git** | [git-scm.com/download/win](https://git-scm.com/download/win) → descargar e instalar |
+
+> **Drush** (la herramienta CLI de Drupal) **no se instala aparte**. Se descarga automáticamente en el paso 3 como parte de `composer install`.
+
+### Verificar que todo está instalado
+
+Abrir una ventana **nueva** de PowerShell y ejecutar:
+
+```powershell
+php -v
+composer --version
+git --version
+```
+
+Los tres comandos deben mostrar sus versiones sin error. Si alguno falla, reinstalar el software correspondiente y **abrir una ventana nueva de PowerShell** (las ventanas viejas no detectan programas recién instalados).
+
+---
+
+## Paso 1 — Descargar el proyecto
+
+```powershell
+cd C:\wamp64\www
+git clone <url-del-repositorio> PruebaTecnicaExito
+```
+
+Si el proyecto se recibió como ZIP: descomprimir y colocar la carpeta en `C:\wamp64\www\PruebaTecnicaExito\`.
+
+Verificar que existe el archivo `C:\wamp64\www\PruebaTecnicaExito\composer.json`.
+
+---
+
+## Paso 2 — Iniciar WAMP
+
+1. Abrir WAMP desde el menú inicio de Windows
+2. Esperar a que el ícono en la barra de tareas (esquina inferior derecha, cerca del reloj) se ponga **verde**
+3. Verde = Apache y MySQL están corriendo
+
+> Si el ícono queda naranja o rojo: otro programa está usando el puerto 80 (Skype, IIS). Cerrar ese programa y reiniciar WAMP.
+
+---
+
+## Paso 3 — Instalar dependencias con Composer
+
+Este comando descarga Drupal, Drush y todas las librerías necesarias:
+
+```powershell
 cd C:\wamp64\www\PruebaTecnicaExito
-drush serve
-
-# Luego ve a esta guía:
-# 📖 QUICK_START.md
-```
-
-### 📋 Opción Instalación Completa (30 minutos)
-```bash
-# Sigue estos pasos:
-# 📖 README_INSTALACION.md
-```
-
----
-
-## 📚 Documentación Disponible
-
-Tenemos **7 documentos profesionales** para diferentes necesidades:
-
-| Documento | Propósito | Tiempo |
-|-----------|-----------|--------|
-| **[FINAL_SUMMARY.md](FINAL_SUMMARY.md)** 🎯 | Resumen ejecutivo + checklist | 10 min |
-| **[QUICK_START.md](QUICK_START.md)** ⭐ | Comenzar en 5 min | 5 min |
-| **[README_INSTALACION.md](README_INSTALACION.md)** | Instalación paso a paso | 30 min |
-| **[ARCHITECTURE.md](ARCHITECTURE.md)** | Decisiones técnicas | 30-60 min |
-| **[AUDIT_REPORT.md](AUDIT_REPORT.md)** | Verificación de requisitos | 15 min |
-| **[SECURITY_CHECKLIST.md](SECURITY_CHECKLIST.md)** 🔒 | Guía de seguridad | 15 min |
-| **[INDEX.md](INDEX.md)** | Índice de navegación | 5 min |
-
----
-
-## ✨ Features Principales
-
-```
-✅ Gestión de Eventos
-   └─ Crear, editar, publicar eventos con título, descripción, país, fecha
-
-✅ Selección Dinámica de País
-   └─ API REST Countries integrada con caché 24h
-
-✅ Sistema de Inscripción AJAX
-   └─ Registro en tiempo real (sin recargar página)
-
-✅ Contador Dinámico
-   └─ Badge actualizado al instante después de registrarse
-
-✅ Validación Antiduplicado
-   └─ Imposible registrarse dos veces en el mismo evento
-
-✅ Protección CSRF
-   └─ Token scoped en cada solicitud
-
-✅ Diseño Responsive
-   └─ Conforme a línea gráfica Móvil Éxito
-
-✅ Accesibilidad WCAG 2.1
-   └─ Semántica HTML, ARIA labels, keyboard navigation
-
-✅ Documentación Profesional
-   └─ 5 documentos explicando todo
-```
-
----
-
-## 🚀 Justificación del Stack Tecnológico (Vanguardia)
-
-Este proyecto ha sido desarrollado utilizando versiones de software de última generación para garantizar el mejor rendimiento y seguridad:
-
-1.  **PHP 8.4.0 (Performance & Type Safety)**: Permite aprovechar mejoras de rendimiento significativas y características modernas como *Property Hooks* y *Asymmetric Visibility*, logrando un código más limpio en servicios como `CountryService`.
-2.  **MySQL 9.1.0 (Data Integrity)**: Ofrece optimizaciones avanzadas en el manejo de JSON y una gestión de memoria superior, asegurando integridad transaccional (ACID) en el sistema de inscripciones.
-3.  **Apache 2.4.62 (Stability)**: El estándar de la industria para entornos robustos, garantizando que el manejo de rutas y URLs amigables de Drupal funcione de manera impecable.
-
----
-
-## 🏗️ Stack Tecnológico
-
-- **Backend**: PHP 8.4.0 (con Drupal 10.3+)
-- **Servidor Web**: Apache 2.4.62
-- **Base de Datos**: MySQL 9.1.0
-- **HTTP Client**: Guzzle (integrado en Drupal)
-- **Validación**: Symfony Validator Component
-- **Caché**: Drupal Cache API
-- **ORM**: Drupal Entity API
-- **API Externa**: REST Countries
-- **Frontend**: HTML5 semántico, CSS3, JavaScript vanilla
-
----
-
-## 📦 Estructura del Proyecto
-
-```
-PruebaTecnicaExito/
-├── 📖 DOCUMENTACIÓN
-│   ├── QUICK_START.md                # ⭐ Empezar aquí
-│   ├── README_INSTALACION.md         # Instalación completa
-│   ├── ARCHITECTURE.md               # Decisiones técnicas
-│   ├── INDEX.md                      # Índice de navegación
-│   └── AUDIT_REPORT.md               # Verificación de requisitos
-│
-├── 🌐 WEB (Drupal)
-│   ├── modules/custom/custom_events/ # Módulo principal
-│   ├── themes/custom/movilexito_theme/ # Tema personalizado
-│   ├── sites/default/settings.php    # Configuración
-│   └── [archivos estándar Drupal]
-│
-├── vendor/                           # Dependencias (Composer)
-├── composer.json                     # Definición de dependencias
-└── README.md                         # Este archivo
-```
-
----
-
-## 🎯 Requisitos Cumplidos
-
-### ✅ Parte 1: Backend (PHP + Drupal)
-
-- [x] Módulo personalizado `custom_events`
-- [x] Entidad personalizada para eventos
-- [x] Lógica de registro de usuarios
-- [x] Validación de no-duplicados
-- [x] APIs de Drupal (sin SQL crudo)
-- [x] Integración con REST Countries API
-
-### ✅ Parte 2: Frontend (HTML, CSS, JS)
-
-- [x] Página de listado de eventos
-- [x] Botón "Registrarse"
-- [x] Mensaje de confirmación (AJAX)
-- [x] Estilos profesionales
-- [x] Línea gráfica Móvil Éxito
-
-### ✅ Parte 3: Integración Drupal
-
-- [x] Rutas definidas (.routing.yml)
-- [x] Controllers y Form API
-- [x] Hooks y servicios implementados
-
-### ✅ Requisitos Adicionales (Valor Agregado)
-
-- [x] CSRF protection
-- [x] Accesibilidad WCAG 2.1
-- [x] Responsive design
-- [x] Caché inteligente 24h
-- [x] Documentación exhaustiva
-- [x] Troubleshooting completo
-
----
-
-## 🚀 Primeros Pasos
-
-### Opción 1: RÁPIDO (5 minutos)
-Si Drupal ya está instalado en tu máquina:
-
-```bash
-cd C:\wamp64\www\PruebaTecnicaExito
-drush serve
-# Navega a http://localhost:8888
-# Login: admin / AdminPassword123
-# Ve a /events
-```
-
-**Guía**: [QUICK_START.md](QUICK_START.md)
-
-### Opción 2: DESDE CERO (30 minutos)
-Si necesitas instalar todo:
-
-```bash
-# 1. Clonar repo
-git clone <repo-url> PruebaTecnicaExito
-cd PruebaTecnicaExito
-
-# 2. Instalar Composer
 composer install
-
-# 3. Crear BD y configurar
-# ... (ver README_INSTALACION.md)
-
-# 4. Instalar Drupal
-drush si drupal --db-url=mysql://...
-
-# 5. Habilitar módulo
-drush en custom_events -y
 ```
 
-**Guía Completa**: [README_INSTALACION.md](README_INSTALACION.md)
+Tiempo estimado: 2–5 minutos según la conexión a internet.
+
+Verificar que Drush quedó instalado:
+
+```powershell
+vendor\bin\drush --version
+```
+
+Debe mostrar `Drush Commandline Tool 12.x.x`.
+
+> **¿Por qué `vendor\bin\drush` y no solo `drush`?**
+> Drush se instala dentro del proyecto (en la carpeta `vendor/`), no globalmente. Siempre se ejecuta con la ruta `vendor\bin\drush` desde la carpeta del proyecto.
 
 ---
 
-## 🔐 Credenciales por Defecto (Post-Instalación)
+## Paso 4 — Crear la base de datos
+
+Drupal necesita una base de datos MySQL vacía. **No se necesita importar ningún archivo `.sql`** — Drupal crea todas las tablas automáticamente en el paso 5.
+
+### Opción A: Con phpMyAdmin (interfaz gráfica)
+
+1. Abrir el navegador e ir a `http://localhost/phpmyadmin/`
+2. Iniciar sesión con usuario `root` y contraseña vacía (dejar el campo en blanco)
+3. En el panel izquierdo, hacer clic en **"New"** (o "Nueva")
+4. Nombre de la base de datos: `prueba_tecnica_exito`
+5. Cotejamiento: `utf8mb4_unicode_ci`
+6. Clic en **"Create"** (Crear)
+
+### Opción B: Por línea de comandos
+
+```powershell
+C:\wamp64\bin\mysql\mysql9.1.0\bin\mysql.exe -u root
+```
+
+> Si la versión de MySQL es diferente, buscar la carpeta correcta dentro de `C:\wamp64\bin\mysql\`.
+
+En la consola de MySQL (prompt `mysql>`), escribir:
+
+```sql
+CREATE DATABASE prueba_tecnica_exito CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+```
+
+Presionar Enter. Debe aparecer `Query OK`. Luego escribir `exit` para salir.
+
+---
+
+## Paso 5 — Instalar Drupal
+
+### Opción A: Por línea de comandos con Drush (recomendado)
+
+```powershell
+cd C:\wamp64\www\PruebaTecnicaExito
+
+vendor\bin\drush site:install standard --db-url=mysql://root:@localhost/prueba_tecnica_exito --site-name="Prueba Técnica Móvil Éxito" --account-name=admin --account-pass=AdminPassword123 -y
+```
+
+Qué hace cada parte:
+- `site:install standard` → instala Drupal con el perfil estándar
+- `mysql://root:@localhost/prueba_tecnica_exito` → conexión a MySQL (usuario `root`, sin contraseña, base de datos `prueba_tecnica_exito`)
+- `--account-name=admin` → crea el usuario administrador
+- `--account-pass=AdminPassword123` → contraseña del administrador
+- `-y` → confirma sin preguntar
+
+Tiempo estimado: 1–3 minutos.
+
+### Opción B: Por interfaz web
+
+1. Abrir el navegador e ir a `http://localhost/PruebaTecnicaExito/web`
+2. Drupal mostrará el asistente de instalación
+3. Idioma: Español (o English)
+4. Perfil: Standard
+5. Base de datos:
+   - Tipo: MySQL
+   - Nombre: `prueba_tecnica_exito`
+   - Usuario: `root`
+   - Contraseña: *(vacío)*
+   - Host: `localhost`, Puerto: `3306`
+6. Configurar el sitio:
+   - Nombre: Prueba Técnica Móvil Éxito
+   - Usuario: admin
+   - Contraseña: AdminPassword123
+7. Clic en "Guardar y continuar"
+
+### Verificar
+
+Abrir `http://localhost/PruebaTecnicaExito/web` → debe cargar la página de inicio de Drupal. Iniciar sesión con `admin` / `AdminPassword123`.
+
+---
+
+## Paso 6 — Habilitar el módulo y el tema
+
+```powershell
+cd C:\wamp64\www\PruebaTecnicaExito
+
+vendor\bin\drush en custom_events -y
+vendor\bin\drush theme:enable movilexito_theme
+vendor\bin\drush config:set system.theme default movilexito_theme -y
+vendor\bin\drush cr
+```
+
+Qué hace cada comando:
+- `drush en custom_events -y` → habilita el módulo de eventos
+- `drush theme:enable movilexito_theme` → habilita el tema visual
+- `drush config:set system.theme default movilexito_theme -y` → lo establece como tema predeterminado
+- `drush cr` → limpia la caché de Drupal
+
+---
+
+## Paso 7 — Verificar que todo funciona
+
+1. Ir a `http://localhost/PruebaTecnicaExito/web` — el sitio debe verse con el diseño de Móvil Éxito (blanco, púrpura, amarillo)
+2. Iniciar sesión como `admin` / `AdminPassword123`
+3. Ir a `/events/add` → crear un evento (título, descripción, seleccionar país de la lista, fecha, marcar Published)
+4. Ir a `/events` → debe aparecer la tarjeta del evento
+5. Cerrar sesión → crear una cuenta normal desde `/user/register`
+6. Iniciar sesión con la cuenta nueva → ir a `/events` → clic en "Registrarse"
+7. El botón cambia a "Ya registrado ✓" y el contador sube **sin recargar la página**
+
+---
+
+## Credenciales
 
 ```
-URL:       http://localhost/PruebaTecnicaExito/web
-Usuario:   admin
+URL:        http://localhost/PruebaTecnicaExito/web
+Usuario:    admin
 Contraseña: AdminPassword123
 ```
 
-⚠️ **IMPORTANTE**: Cambia estas credenciales antes de desplegar en producción.
-
----
-
-## 🎨 Paleta de Colores
-
-| Color | Uso | Código |
-|-------|-----|--------|
-| 🟣 Púrpura | Primario | `#2e008b` |
-| 🟡 Amarillo | Destaque | `#ffea00` |
-| ✅ Verde | Éxito | `#1a8a4a` |
-| ⚫ Negro | Base | `#0d0d0d` |
-| ⚪ Blanco | Fondo | `#ffffff` |
-
----
-
-## 📱 Links Importantes
+## URLs principales
 
 | Página | URL |
-|--------|-----|
-| 🏠 Home | `/` |
-| 📅 Eventos | `/events` |
-| 👤 Mi Perfil | `/user` |
-| 🔐 Login | `/user/login` |
-| ✍️ Registro | `/user/register` |
-| 🛠️ Admin Dashboard | `/admin` |
-| 📋 Gestionar Eventos | `/admin/content/events` |
-| 📊 Ver Registros | `/admin/content/event-registrations` |
+|---|---|
+| Inicio | `/` |
+| Eventos (público) | `/events` |
+| Crear evento (admin) | `/events/add` |
+| Login | `/user/login` |
+| Registro de cuenta | `/user/register` |
+| Admin | `/admin` |
+| Gestionar eventos | `/admin/content/events` |
+| Ver inscripciones | `/admin/content/event-registrations` |
 
 ---
 
-## 🆘 ¿Problemas?
+## Solución de problemas
 
-### Instalación
-→ Consulta [README_INSTALACION.md - Troubleshooting](README_INSTALACION.md#-troubleshooting-solución-de-problemas)
+### `composer install` falla con "php is not recognized"
 
-### Entender el Código
-→ Lee [ARCHITECTURE.md](ARCHITECTURE.md)
+PHP no está en el PATH. Solución:
+1. Menú inicio → buscar "variables de entorno" → abrir
+2. Variables del sistema → `Path` → Editar
+3. Agregar: `C:\wamp64\bin\php\php8.4.0\`
+4. Aceptar todo → **abrir una ventana nueva de PowerShell**
 
-### Cómo Usar
-→ Sigue [QUICK_START.md](QUICK_START.md)
+### `vendor\bin\drush` falla con "not recognized"
 
-### Preguntas Específicas
-→ Busca en [INDEX.md](INDEX.md)
+No se ejecutó `composer install` o se está en la carpeta equivocada. Solución:
 
----
-
-## 📊 Estadísticas del Proyecto
-
-| Métrica | Valor |
-|---------|-------|
-| **Líneas de código** | ~1,500 |
-| **Documentación** | 5 archivos markdown |
-| **Funciones principales** | 8 |
-| **Entidades personalizadas** | 2 |
-| **Servicios implementados** | 2 |
-| **Dependencias externas** | 0 (solo Drupal core) |
-| **Tiempo de desarrollo** | ~16 horas |
-
----
-
-## ✅ Checklist Rápido
-
-- [ ] Leer [QUICK_START.md](QUICK_START.md)
-- [ ] Ejecutar instalación
-- [ ] Acceder a `/events`
-- [ ] Crear un evento
-- [ ] Registrarse en evento
-- [ ] Ver actualización dinámica
-- [ ] Leer [ARCHITECTURE.md](ARCHITECTURE.md)
-- [ ] Revisar código fuente
-
----
-
-## 🏆 Diferenciales del Proyecto
-
-### Seguridad ⭐⭐⭐⭐⭐
-- CSRF token scoped
-- SQL injection prevention
-- XSS mitigation
-- Authentication + Authorization
-
-### Performance ⭐⭐⭐⭐
-- Caché de 24h
-- Entity queries optimizadas
-- Lazy loading
-
-### Accesibilidad ⭐⭐⭐⭐⭐
-- WCAG 2.1 compliant
-- ARIA labels
-- Semantic HTML5
-
-### Documentación ⭐⭐⭐⭐⭐
-- 5 documentos profesionales
-- Troubleshooting exhaustivo
-- Decisiones técnicas explicadas
-
-### Code Quality ⭐⭐⭐⭐⭐
-- Strict types en PHP
-- Type hints completos
-- Service pattern
-- DI container
-
----
-
-## 🎓 Aprendizaje y Exploración
-
-### Para Aprender Drupal 10
-1. Lee: [ARCHITECTURE.md](ARCHITECTURE.md) → Sección "Diagramas"
-2. Explora: `web/modules/custom/custom_events/src/`
-3. Estudia: Entity API, Form API, Services
-4. Prueba: Hacer cambios pequeños y ver qué pasa
-
-### Para Contribuir Código
-1. Crea rama: `git checkout -b feature/mi-feature`
-2. Sigue código existente (patrones de style)
-3. Haz commit: `git commit -m "feat: descripción"`
-4. Abre Pull Request
-
-### Para Preparar Presentación
-1. Leer: [QUICK_START.md](QUICK_START.md) (5 min demo)
-2. Leer: [ARCHITECTURE.md](ARCHITECTURE.md) (15 min explicación)
-3. Demostrar: /events en navegador (5 min)
-4. Q&A: Responder preguntas (10 min)
-
----
-
-## 🌟 Características Destacadas
-
-### 🔌 Service Pattern
-Lógica de negocio separada en servicios inyectables:
-- `EventRegistrationService` → inscripciones
-- `CountryService` → consumo de API
-
-### 🛡️ Entity Validators
-Validadores Symfony a nivel de entidad:
-- `UniqueEventRegistration` → previene duplicados
-
-### 📡 AJAX Moderno
-JavaScript vanilla sin frameworks:
-- `fetch()` API
-- `Drupal.behaviors` pattern
-- Toast notifications
-
-### 🎨 Responsive Design
-- Grid automático
-- Breakpoints inteligentes
-- Mobile-first approach
-
-### 🌍 i18n Ready
-- Todas las strings con `t()`
-- Traducciones españolas incluidas
-
----
-
-## 📞 Soporte
-
-### Logs en Tiempo Real
-```bash
-drush watchdog:tail
+```powershell
+cd C:\wamp64\www\PruebaTecnicaExito
+composer install
+vendor\bin\drush --version
 ```
 
-### Debug Mode
-```bash
-# En settings.php
-$config['system.logging']['error_level'] = 'verbose';
+### Error de conexión a base de datos al instalar Drupal
+
+1. Verificar que WAMP está corriendo (ícono verde)
+2. Verificar que la base de datos `prueba_tecnica_exito` existe en phpMyAdmin (`http://localhost/phpmyadmin/`)
+3. WAMP usa usuario `root` sin contraseña. El `--db-url` correcto es: `mysql://root:@localhost/prueba_tecnica_exito`
+
+### La lista de países está vacía al crear un evento
+
+La API de REST Countries no pudo contactarse. Verificar conexión a internet y que `https://restcountries.com/v3.1/all?fields=name` abre en el navegador.
+
+### El sitio se ve sin estilos (sin colores ni diseño)
+
+El tema no está activo. Ejecutar:
+
+```powershell
+cd C:\wamp64\www\PruebaTecnicaExito
+vendor\bin\drush config:set system.theme default movilexito_theme -y
+vendor\bin\drush cr
 ```
 
-### Base de Datos
-```bash
-drush sql:cli    # Acceso a MySQL
-drus sql:query "SELECT * FROM custom_event LIMIT 5;"
+Además, limpiar la caché del navegador: `Ctrl + Shift + Supr`.
+
+### Error 404 en `/events`
+
+El módulo no está habilitado:
+
+```powershell
+vendor\bin\drush en custom_events -y
+vendor\bin\drush cr
 ```
 
----
+### El botón "Registrarse" da error 403
 
-## 📄 Licencia
-
-Este proyecto es parte de una **Prueba Técnica** de selección.
-
----
-
-## 👨‍💻 Autor
-
-Desarrollado como solución técnica completa mostrando:
-- Expertise en Drupal 10
-- PHP 8.1+ modernos
-- Arquitectura limpia
-- Frontend responsive
-- Documentación profesional
-
----
-
-## 🚀 Próximos Pasos
-
-```
-1. ⭐ Leer QUICK_START.md
-   └─ 5 minutos
-
-2. 🚀 Ejecutar instalación
-   └─ 20 minutos
-
-3. 📖 Explorar código
-   └─ 30 minutos
-
-4. 📚 Leer ARCHITECTURE.md
-   └─ 30 minutos
-
-5. 🎉 ¡Listo para entender todo!
-```
-
----
-
-## 🎯 Resumen
-
-| Aspecto | Nivel |
-|--------|-------|
-| **Funcionalidad** | ✅ 100% Completado |
-| **Código** | ✅ Profesional |
-| **Documentación** | ✅ Exhaustiva |
-| **Seguridad** | ✅ Enterprise-grade |
-| **Accesibilidad** | ✅ WCAG 2.1 |
-| **Performance** | ✅ Optimizado |
-
----
-
-**🎉 Bienvenido al proyecto. ¡Esperamos que disfrutes explorando esta implementación profesional de Drupal!**
-
----
-
-### 🔗 Empezar Ahora
-
-**⭐ [QUICK_START.md](QUICK_START.md)** ← Comienza aquí (5 minutos)
-
-**📋 [README_INSTALACION.md](README_INSTALACION.md)** ← Instalación completa (30 minutos)
-
-**🏗️ [ARCHITECTURE.md](ARCHITECTURE.md)** ← Arquitectura completa (1 hora)
-
-**📖 [INDEX.md](INDEX.md)** ← Índice y navegación
-
-**✅ [AUDIT_REPORT.md](AUDIT_REPORT.md)** ← Verificación de requisitos
-
----
-
-**Última actualización**: 29 de Marzo de 2026  
-**Versión**: 1.2.0  
-**Estado**: ✅ Listo para Producción
+Token de seguridad expirado. Cerrar sesión, limpiar cookies del navegador (`F12` → Application → Cookies → Clear), volver a iniciar sesión e intentar de nuevo.
